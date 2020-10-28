@@ -12,4 +12,4 @@ export const store = createStore(rootReaducer, applyMiddleware(...middlewares));
 export const persistor = persistStore(store);
 //===============================================
 
-export default {store, persistor}
+// export default { store, persistStore };
