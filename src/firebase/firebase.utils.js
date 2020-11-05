@@ -59,7 +59,21 @@ export const signInWithGoogle = () => firebase.auth().signInWithRedirect(provide
     return userRef;
   }
 
- 
+//  transfera baza de date shop.data.js in firebase data base
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey)
+  console.log(collectionRef);
+
+  // creaza o batch in cazul incare data_list esueaza inrun anumit punct
+  // atunci toata data_list va esua
+  const batch = firestore.batch();
+  objectsToAdd.forEach( obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+}
 
  
 
