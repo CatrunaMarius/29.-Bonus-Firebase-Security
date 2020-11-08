@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+
 // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -59,7 +60,7 @@ export const signInWithGoogle = () => firebase.auth().signInWithRedirect(provide
     return userRef;
   }
 
-//  transfera baza de date shop.data.js in firebase data base
+// functia care creza noi colecti si documente cand vrem
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   const collectionRef = firestore.collection(collectionKey)
   console.log(collectionRef);
@@ -75,6 +76,22 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   return await batch.commit();
 }
 
- 
+export const convertCollectionsSnapshotToMap = (collections) =>{
+   const trasformedCollection = collections.docs.map(doc =>{
+     const { title, items } = doc.data();
+
+     return {
+       routeName: encodeURI(title.toLowerCase()),
+       id: doc.id,
+       title,
+       items
+     };
+   });
+
+  return trasformedCollection.reduce( (accumulator, collection) => {
+     accumulator[collection.title.toLowerCase()]= collection;
+     return accumulator;
+   }, {});
+ }
 
 export default firebase;

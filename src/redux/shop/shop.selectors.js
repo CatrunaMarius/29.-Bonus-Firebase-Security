@@ -11,7 +11,7 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector(
     [selectCollections],
-    collections => Object.keys(collections).map(key => collections[key])
+    collections => collections ? Object.keys(collections).map(key => collections[key]) : []
 )
 
 // selecteaza pt match map id
@@ -20,6 +20,6 @@ export const selectCollection = collectionUrlParam =>
     createSelector(
         [selectCollections],
         // map 
-        collections => collections[collectionUrlParam] 
+        collections =>collections ? collections[collectionUrlParam] : null
            
     )
