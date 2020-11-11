@@ -23,3 +23,14 @@ export const selectCollection = collectionUrlParam =>
         collections =>collections ? collections[collectionUrlParam] : null
            
     )
+
+export const selectIsCollectionFetching = createSelector(
+    [selectShop],
+    shop => shop.isFetching
+);
+
+//determina si trimiete o valuare booling daca o colectie este null sau nu
+export const selectIsCollectionsLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+)
