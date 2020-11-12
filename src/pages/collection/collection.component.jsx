@@ -11,6 +11,14 @@ import {
     CollectionItemsContainer
   } from './collection.styles';
 
+
+
+
+
+
+
+
+  
 const CollectionPage = ( { collection }) => {
     const {title, items} = collection;
 

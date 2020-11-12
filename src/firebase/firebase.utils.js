@@ -26,10 +26,12 @@ const firebaseConfig = {
   export const firestore = firebase.firestore();
 
 //  setare autetificare utiliti cu Google
-const provider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 
-export const signInWithGoogle = () => firebase.auth().signInWithRedirect(provider);
+export const signInWithGoogle = () => firebase.auth().signInWithRedirect(googleProvider);
+// export const signInWithGoogle = () => firebase.auth().signInWithPopup(googleProvider);
+
 
 // initialize database
   //preaia userul autetificat cu google si il trece in database
@@ -40,7 +42,7 @@ export const signInWithGoogle = () => firebase.auth().signInWithRedirect(provide
     // daca nu exista vom crea acel utilizator in baza de date
     //verifica daca acel user exita
     if (!snapShot.exists){
-      const { email, displayName } = userAuth;
+      const {  displayName, email } = userAuth;
       const createdAt = new Date();
 
       // creaza acel user daca nu exista
@@ -61,7 +63,9 @@ export const signInWithGoogle = () => firebase.auth().signInWithRedirect(provide
   }
 
 // functia care creza noi colecti si documente cand vrem
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async (
+  collectionKey, 
+  objectsToAdd) => {
   const collectionRef = firestore.collection(collectionKey)
   console.log(collectionRef);
 
@@ -76,7 +80,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   return await batch.commit();
 }
 
-export const convertCollectionsSnapshotToMap = (collections) =>{
+export const convertCollectionsSnapshotToMap = collections =>{
    const trasformedCollection = collections.docs.map(doc =>{
      const { title, items } = doc.data();
 
@@ -93,5 +97,15 @@ export const convertCollectionsSnapshotToMap = (collections) =>{
      return accumulator;
    }, {});
  }
+
+ export const getCurrentUser = () => {
+   return new Promise ((resolve, reject) => {
+     const unsubscribe = auth.onAuthStateChanged(userAuth => {
+       unsubscribe();
+       resolve(userAuth);
+     }, reject)
+   })
+ }
+
 
 export default firebase;

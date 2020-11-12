@@ -2,6 +2,10 @@ import { createSelector } from 'reselect';
 
 
 
+
+
+
+
 const selectShop = state => state.shop;
 
 export const selectCollections = createSelector(
@@ -20,7 +24,7 @@ export const selectCollection = collectionUrlParam =>
     createSelector(
         [selectCollections],
         // map 
-        collections =>collections ? collections[collectionUrlParam] : null
+        collections => (collections ? collections[collectionUrlParam] : null)
            
     )
 

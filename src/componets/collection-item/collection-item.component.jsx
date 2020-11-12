@@ -13,6 +13,13 @@ import {
     PriceContainer
   } from './collection-styles.styles';
 
+
+
+
+
+
+  
+
 const CollectionsItem = ({item, addItem }) => {
     const {  name, price, imageUrl } = item;
 

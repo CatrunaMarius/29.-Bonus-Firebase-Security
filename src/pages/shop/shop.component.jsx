@@ -1,15 +1,24 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { connect } from 'react-redux' ;
+import { connect } from 'react-redux';
 
-import CollectionOverviewContainer from '../../componets/collections-overview/collections-overview.container';
+import CollectionsOverviewContainer from '../../componets/collections-overview/collections-overview.container';
 import CollectionPageContainer from '../collection/collection.container';
 
 
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 
-class ShpePage extends React.Component {
+
+
+
+
+
+
+
+
+
+class ShopPage extends React.Component {
 
   
 
@@ -27,7 +36,7 @@ class ShpePage extends React.Component {
                 <Route 
                 exact 
                 path={`${match.path}`} 
-                component={CollectionOverviewContainer}
+                component={CollectionsOverviewContainer}
                    
                 />
 
@@ -36,17 +45,17 @@ class ShpePage extends React.Component {
                 component={CollectionPageContainer} 
                 />
             </div>
-        )
-       
+        );
     }
-};
+}
 
 
     
 const mapDispatchToProps = dispatch => ({
    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
-})
+});
 
 export default connect(
     null,
-     mapDispatchToProps)( ShpePage);
+    mapDispatchToProps
+)(ShopPage);

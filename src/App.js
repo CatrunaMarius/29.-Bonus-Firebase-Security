@@ -12,9 +12,15 @@ import Header from './componets/header/header.component'
 import SignInAndSignUpPage  from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 import CheckoutPage from './pages/chechout/chechout.component'
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { setCurrentUser } from './redux/user/user.actions';
+
 import {selectCurrentUser} from './redux/user/user.selectors'
+import { checkUserSession } from './redux/user/user.actions';
+
+
+
+
+
+
 
 
 class App extends React.Component {
@@ -25,26 +31,10 @@ class App extends React.Component {
 
   componentDidMount(){
 
-    // destructurare colectione
-    const {setCurrentUser } = this.props;
+    const { checkUserSession } = this.props;
+    checkUserSession();
+ 
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-            
-       if (userAuth){
-         const userRef = await createUserProfileDocument(userAuth);
-
-         userRef.onSnapshot(snapShot => {
-            setCurrentUser({            
-              id: snapShot.id,
-              ...snapShot.data()
-                     
-           });        
-         });
-       }
-
-       setCurrentUser(userAuth);
-      
-    });
   }
 
 
@@ -62,7 +52,17 @@ class App extends React.Component {
           <Route exact path='/' component={HomePage} />
           <Route  path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
-          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
+          <Route 
+          exact 
+          path='/signin' 
+          render={() => 
+            this.props.currentUser ? (
+              <Redirect to='/' />
+              ) : (
+              <SignInAndSignUpPage />
+              )
+            } 
+          />
         </Switch>
         
   
@@ -75,14 +75,16 @@ class App extends React.Component {
 // atunci cand este conecta userul nu mai ai a acces la pagina de signin
 // redirectioneaza catre home daca utilizatorul este signin
 const mapStateToProps = createStructuredSelector({
-   currentUser: selectCurrentUser,
+   currentUser: selectCurrentUser
   
 })
 
 
-// trimite setcurentUser
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+const mapDispatchToProps = dispatch =>({
+  checkUserSession: () => dispatch(checkUserSession())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps )(App) ;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

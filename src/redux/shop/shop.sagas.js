@@ -1,7 +1,10 @@
 // acest foldar contine toate codurile cu saga care sunt relevante de catre shop
 
-import { takeLatest,call, put } from 'redux-saga/effects';
-import { firestore, convertCollectionsSnapshotToMap} from '../../firebase/firebase.utils';
+import { takeLatest,call, put, all } from 'redux-saga/effects';
+import { 
+    firestore, 
+    convertCollectionsSnapshotToMap
+} from '../../firebase/firebase.utils';
 
 import { 
     fetchCollectionsSuccess,
@@ -10,8 +13,16 @@ import {
 
 import ShopActionTypes from './shop.types';
 
-export function* fetchCollectionAsync(){
-   yield console.log('i am fired');
+
+
+
+
+
+
+
+
+export function* fetchCollectionsAsync(){
+   
 
    try 
    {
@@ -32,9 +43,15 @@ export function* fetchCollectionAsync(){
         
 }
 
-export function* fetchcollectionsStart(){
+export function* fetchCollectionsStart(){
     yield takeLatest(
         ShopActionTypes.FETCH_COLLECTIONS_START,
-        fetchCollectionAsync
+        fetchCollectionsAsync
         );
+}
+
+export function* shopSagas() {
+    yield all([
+        call(fetchCollectionsStart)
+    ])
 }
