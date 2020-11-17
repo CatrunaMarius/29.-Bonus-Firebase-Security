@@ -8,48 +8,67 @@ import StripeCheckoutButton from '../../componets/stripe-button/stripe-button.co
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 
-import './checkout.styles.scss';
+import {
+    CheckoutPageContainer,
+    CheckoutHeaderContainer,
+    HeaderBlockContainer,
+    TotalContainer,
+    WarningContainer
+  } from './checkout.styles';
+
+
+
+
+
+
+
+
+
 
 const CheckoutPage = ({ cartItems, total}) =>(
-    <div className='checkout-page'>
-        <div className='checkout-header'>
-            <div className='header-block'>
+    <CheckoutPageContainer>
+        <CheckoutHeaderContainer>
+            <HeaderBlockContainer>
                 <span>Product</span>
-            </div>
-            <div className='header-block'>
+            </HeaderBlockContainer>
+            <HeaderBlockContainer>
                 <span>Description</span>
-            </div>
-            <div className='header-block'>
+            </HeaderBlockContainer>
+            <HeaderBlockContainer>
+
+
+
+
                 <span>Quantity</span>
-            </div>
-            <div className='header-block'>
+            </HeaderBlockContainer>
+            <HeaderBlockContainer>
                 <span>Price</span>
-            </div>
-            <div className='header-block'>
+            </HeaderBlockContainer>
+            <HeaderBlockContainer>
                 <span>Remove</span>
-            </div>
-        </div>
+            </HeaderBlockContainer>
+        </CheckoutHeaderContainer>
         {
             cartItems.map( cartItem =>
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />
                 )
         }
 
-        <div className='total'>
-            <span>TOTAL: ${total}</span>
-           
-             <div className='test'>
-                 *Please use the following to test credit card for payment with stripe *
-                 <br />
-                 Card number: 4000 0566 5566 5556 - CVC:Any 3 digits - Exp: Any future date 
-                 <br/>
-                 More card number find here
-                 https://stripe.com/docs/testing#cards
-                 </div>
+        
+        <TotalContainer>TOTAL: ${total}</TotalContainer>
+        
+            <WarningContainer>
+                *Please use the following to test credit card for payment with stripe *
+                <br />
+                Card number: 4000 0566 5566 5556 - CVC:Any 3 digits - Exp: Any future date 
+                <br/>
+                More card number find here
+                https://stripe.com/docs/testing#cards
+            </WarningContainer>
               
-        </div>
+        
         <StripeCheckoutButton  price={total} />
-    </div>
+    </CheckoutPageContainer>
 )
 
 const mapStateToProps = createStructuredSelector({

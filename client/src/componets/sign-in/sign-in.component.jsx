@@ -67,10 +67,11 @@ const  SingIn = ({ emailSignInStart, googleSignInStart }) => {
 
             <form onSubmit={handleSubmit}>
                 <FormInput 
-                    type="email" 
-                    name="email" 
-                    value={email}
+                    
+                    name="email"
+                    type="email"  
                     handleChange={handleChange}
+                    value={email}
                     lable='email'
                     required/>
                 

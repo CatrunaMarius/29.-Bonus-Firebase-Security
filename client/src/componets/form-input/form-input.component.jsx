@@ -1,21 +1,33 @@
 import React from 'react';
 
-import './form-input.styles.scss'
+import {
+    GroupContainer,
+    FormInputContainer,
+    FormInputLabel
+  } from './form-input.styles';
+
+
+
+
+
+
+
+
 
 //acesta va fi o componenta functionala pentru ca nu vrem nici un state
 
-const FormInput = ({ handleChange, lable, ...otherProps }) => (
-    <div className="group">
-        <input className='form-input' onChange={handleChange} {...otherProps}/>
+const FormInput = ({ handleChange, lable, ...props }) => (
+    <GroupContainer>
+        <FormInputContainer onChange={handleChange} {...props}/>
 
         {
-            lable ? 
-            (<label className={`${otherProps.value.lenght ? 'shrink': ''} form-input-label`}>
+            lable ? (
+            <FormInputLabel className={props.value.length ? 'shrink': ''} >
                 {lable}
-            </label>) : null
+            </FormInputLabel>) : null
         }
 
-    </div>
+    </GroupContainer>
 )
 
 
