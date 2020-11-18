@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const badyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const path = require('path');
 const { error } = require('console');
 
@@ -11,43 +11,43 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(badyParser.json());
-app.use(badyParser.urlencoded({ extended:true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //verifica originea portulu
 app.use(cors());
 
-if(process.env.NODE_ENV === 'prduction') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));
 
     // req este cerinta pe care am ceruta iar
     // res este raspunsul pe care il trimitem inapoi
-    app.get('*', function(req, res){
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 
 }
 
 app.listen(port, error => {
-    if(error) throw error;
+    if (error) throw error;
     console.log('Server running on port ' + port);
-})
+});
 
 // se ocupa de efectuare plati
-app.post('/payment', (req,res) =>{
+app.post('/payment', (req, res) => {
     // ce primim de stripe
     const body = {
         source: req.body.token.id,
         amount: req.body.amount,
-        currency:'usd'
+        currency: 'usd'
     };
 
     //verifica efectuare plati cu cardul
     stripe.charges.create(body, (stripeError, stripeRes) =>{
         if (stripeError){
-            res.status(500).send({error: stripeError })
+            res.status(500).send({ error: stripeError });
         } else {
-            res.status(200).send({ success: stripeRes })
+            res.status(200).send({ success: stripeRes });
         }
     })
 })
