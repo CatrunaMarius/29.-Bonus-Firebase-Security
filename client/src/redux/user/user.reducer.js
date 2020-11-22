@@ -1,14 +1,14 @@
-import  UserActionTypes  from './user.types';
+import UserActionTypes from './user.types';
 
 const INITIAL_STATE = {
     currentUser: null,
     error: null
-}
+};
 
-const userReaducer = (state = INITIAL_STATE, action) => {
+const userReducer = (state = INITIAL_STATE, action) => {
     
     //depinde de tipul de actiune  
-    switch(action.type){
+    switch (action.type) {
         // verifica daca cazul = SIGN_IN_SUCCESS
         case UserActionTypes.SIGN_IN_SUCCESS:
          
@@ -16,14 +16,14 @@ const userReaducer = (state = INITIAL_STATE, action) => {
                  ...state,
                  currentUser: action.payload,
                  error: null
-             }
+             };
         // verifica daca signout a reusit
         case UserActionTypes.SIGN_OUT_SUCCESS:
             return {
                 ...state,
                 currentUser: null,
                 error: null
-            }
+            };
 
         //  verifica daca a esuant signin/signout
         case UserActionTypes.SIGN_IN_FAILURE:
@@ -32,12 +32,12 @@ const userReaducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 error: action.payload
-            }
+            };
 
        //daca nici unu din cazuri nu sunt indeplinite se aplica default 
          default:
              return state;
     }
-}
+};
 
-export default userReaducer;
+export default userReducer;

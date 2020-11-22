@@ -11,12 +11,13 @@ const selectShop = state => state.shop;
 export const selectCollections = createSelector(
     [selectShop],
     shop => shop.collections
-)
+);
 
 export const selectCollectionsForPreview = createSelector(
     [selectCollections],
-    collections => collections ? Object.keys(collections).map(key => collections[key]) : []
-)
+    collections =>
+        collections ? Object.keys(collections).map(key => collections[key]) : []
+);
 
 // selecteaza pt match map id
 
@@ -25,8 +26,7 @@ export const selectCollection = collectionUrlParam =>
         [selectCollections],
         // map 
         collections => (collections ? collections[collectionUrlParam] : null)
-           
-    )
+    );
 
 export const selectIsCollectionFetching = createSelector(
     [selectShop],
@@ -37,4 +37,4 @@ export const selectIsCollectionFetching = createSelector(
 export const selectIsCollectionsLoaded = createSelector(
     [selectShop],
     shop => !!shop.collections
-)
+);

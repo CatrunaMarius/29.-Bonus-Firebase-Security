@@ -27,23 +27,24 @@ export function* fetchCollectionsAsync(){
    try 
    {
     //colection    
-   const collectionRef =  firestore.collection('collections');
+   const collectionRef = firestore.collection('collections');
     // folosim collectionref pentru a optine snapshot dar in loc sa folosim o promisiune volosim o functie generatoare
    const snapshot = yield collectionRef.get(); // cand aceasa valoare vine inapoi vine sub forma unei promisiuni
     //creare collection map    
    const collectionsMap = yield call(
        convertCollectionsSnapshotToMap,
-        snapshot);
+        snapshot
+    );
    
    yield put(fetchCollectionsSuccess(collectionsMap));
 
-   }catch(error) {
-       yield put(fetchCollectionsFailure(error.message))
+   } catch (error) {
+       yield put(fetchCollectionsFailure(error.message));
    }
         
 }
 
-export function* fetchCollectionsStart(){
+export function* fetchCollectionsStart() {
     yield takeLatest(
         ShopActionTypes.FETCH_COLLECTIONS_START,
         fetchCollectionsAsync
@@ -53,5 +54,5 @@ export function* fetchCollectionsStart(){
 export function* shopSagas() {
     yield all([
         call(fetchCollectionsStart)
-    ])
+    ]);
 }

@@ -11,7 +11,7 @@ import {
     BackgroundImage,
     NameContainer,
     PriceContainer
-  } from './collection-styles.styles';
+  } from './collection-item.styles';
 
 
 
@@ -31,7 +31,7 @@ const CollectionsItem = ({item, addItem }) => {
             <NameContainer>{name}</NameContainer>
             <PriceContainer>{price}</PriceContainer>
         </CollectionFooterContainer>
-        <AddButton onClick={()=> addItem(item)} inverted>
+        <AddButton onClick={() => addItem(item)} inverted>
              Add to cart 
         </AddButton>
     </CollectionItemContainer>

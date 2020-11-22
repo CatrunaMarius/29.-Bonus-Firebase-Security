@@ -33,6 +33,6 @@ const MenuItem = ({title, imageUrl, size, history,linkUrl, match}) => (
         </ContentContainer>
 
     </MenuItemContainer>
-)
+);
 
 export default withRouter(MenuItem);
