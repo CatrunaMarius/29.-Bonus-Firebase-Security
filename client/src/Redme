@@ -1,5 +1,37 @@
+Progress App
+This line optimizes the site depending on the device (mobile, tablet or desktop).
+This line of code must be found in the index.html file at the head.
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+also in the public folder next to index.html we must find a manifest.json file.
+to work progress app we need the serviceWorker.js file
+https://github.com/jeffposnick/create-react-pwa/compare/starting-point...pwa
+
+
 Resources
 
 Mobil friendly
 https://developer.mozilla.org/en-US/docs/Web/CSS/@media
 https://css-tricks.com/snippets/css/complete-guide-grid/
+
+
+Performance
+React lazy
+https://reactjs.org/docs/code-splitting.html#reactlazy
+React suspense
+https://reactjs.org/docs/code-splitting.html#suspense
+Error Boundaries
+https://reactjs.org/docs/error-boundaries.html
+404 images
+https://www.kapwing.com/404-illustrations?ref=producthunt
+React.PureComponent
+https://reactjs.org/docs/react-api.html#reactpurecomponent
+React.memo
+https://reactjs.org/docs/react-api.html#reactmemo
+useCallback
+https://reactjs.org/docs/hooks-reference.html#usecallback
+useMemo
+https://reactjs.org/docs/hooks-reference.html#usememo
+Gzipping and Compression
+https://www.npmjs.com/package/compression
+Profiler API
+https://reactjs.org/docs/profiler.html#usage
