@@ -35,3 +35,17 @@ Gzipping and Compression
 https://www.npmjs.com/package/compression
 Profiler API
 https://reactjs.org/docs/profiler.html#usage
+
+
+Firestore Security
+
+Firebase security rules docs
+https://firebase.google.com/docs/firestore/security/rules-structure
+Firebase Request Auth
+https://firebase.google.com/docs/firestore/security/rules-conditions#authentication
+
+*carts collections
+Firestore where keyword
+https://firebase.google.com/docs/firestore/query-data/get-data#get_multiple_documents_from_a_collection
+Security rules resource and data docs
+https://firebase.google.com/docs/firestore/security/rules-conditions#data_validation

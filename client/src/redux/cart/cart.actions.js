@@ -35,3 +35,14 @@ export const clearItemFromCart = item => ({
 export const clearCart = () => ({
     type: CartActionTypes.CLEAR_CART
 });
+
+// Seteaza coslui in baza de date pentru primadata
+export const setCartFromFirebase = cartItems  => ({
+    type: CartActionTypes.SET_CART_FROM_FIREBASE,
+    payload: cartItems
+});
+
+// uptateaza cosul in baza de date
+export const updateCartInFirebase = () => ({
+    type: CartActionTypes.UPDATE_CART_IN_FIREBASE
+});

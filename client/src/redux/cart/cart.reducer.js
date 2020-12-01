@@ -1,6 +1,6 @@
 // se ocupa de partea de adauga iteme in cos
 import CartActionTypes from './cart.types';
-import { addItemToCart, removeItemFromCart } from './cart.utils'
+import { addItemToCart, removeItemFromCart } from './cart.utils';
 
 
 
@@ -52,10 +52,17 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: []
             };
+        
+        // seteaza/creaza cosul in baza de date
+        case CartActionTypes.SET_CART_FROM_FIREBASE:
+            return {
+                ...state,
+                cartItems: action.payload
+            };
 
         default:
             return state;
-    }
+    }  
 };
 
 export default cartReducer;

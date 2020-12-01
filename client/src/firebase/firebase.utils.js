@@ -62,6 +62,26 @@ export const signInWithGoogle = () => firebase.auth().signInWithRedirect(googleP
     return userRef;
   }
 
+// salveaza cosul utilizatorului in baza de date
+export const getUserCartRef = async userId => {
+  // initializarea bazei de data a cosulu
+  const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+  const snapShot = await cartsRef.get();
+
+  // salvara in cos
+  if (snapShot.empty) {
+    const cartDocRef = firestore.collection('carts').doc();
+    await cartDocRef.set({ userId, cartItems: [] });
+    return cartDocRef;
+  } else {
+    return snapShot.docs[0].ref;
+  }
+};
+
+
+
+
+
 // functia care creza noi colecti si documente cand vrem
 export const addCollectionAndDocuments = async (
   collectionKey, 
